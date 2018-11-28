@@ -1,0 +1,30 @@
+.carousel-img
+{width: auto;height: 300px}
+.nav-tabs
+{
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+}
+.thumb-img
+{
+    width: 60px;
+    height: 60px;
+}
+.font-md{
+    font-size: 22px;
+}
+.font-red{
+    color: #c7254e;
+}
+.font-nav{
+    font-size: 20px;
+}
+.photo-img {
+    width: 60px;
+    height: 60px;
+}
+.photo-img-md {
+    width: 120px;
+    height: 120px;
+}
