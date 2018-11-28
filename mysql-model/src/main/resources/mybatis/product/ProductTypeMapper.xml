@@ -3,11 +3,11 @@
 
 <mapper namespace="com.personal.product.dao.ProductTypeDao">
 
-	<select id="get" resultType="com.personal.product.domian.ProductTypeDO">
+	<select id="get" resultType="com.personal.product.domain.ProductTypeDO">
 		select `id`,`pid`,`name`,`memo`,`pic`,`full_py`,`short_py`,`sort`,`add_time`,`update_time` from bus_product_type where id = #{value}
 	</select>
 
-	<select id="list" resultType="com.personal.product.domian.ProductTypeDO">
+	<select id="list" resultType="com.personal.product.domain.ProductTypeDO">
 		select `id`,`pid`,`name`,`memo`,`pic`,`full_py`,`short_py`,`sort`,`add_time`,`update_time` from bus_product_type
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
@@ -50,7 +50,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.personal.product.domian.ProductTypeDO">
+	<insert id="save" parameterType="com.personal.product.domain.ProductTypeDO">
 		insert into bus_product_type
 		(
 			`id`, 
@@ -79,7 +79,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.personal.product.domian.ProductTypeDO">
+	<update id="update" parameterType="com.personal.product.domain.ProductTypeDO">
 		update bus_product_type 
 		<set>
 			<if test="pid != null">`pid` = #{pid}, </if>

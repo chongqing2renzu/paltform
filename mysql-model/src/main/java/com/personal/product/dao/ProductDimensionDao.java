@@ -1,5 +1,6 @@
 package com.personal.product.dao;
 
+import com.personal.common.MyBaseMapper;
 import com.personal.product.domain.ProductDimensionDO;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2018-11-28 21:21:13
  */
 @Mapper
-public interface ProductDimensionDao {
+public interface ProductDimensionDao extends MyBaseMapper<ProductDimensionDO>{
 
 	ProductDimensionDO get(Integer id);
 	

@@ -3,6 +3,13 @@ package com.personal.product.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 
 /**
@@ -12,6 +19,11 @@ import java.util.Date;
  * @email 1992lcg@163.com
  * @date 2018-11-28 21:21:13
  */
+@Table(name="bus_product_promotion")
+@Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductPromotionDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,52 +36,4 @@ public class ProductPromotionDO implements Serializable {
 	//
 	private Date addTime;
 
-	/**
-	 * 设置：
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getId() {
-		return id;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getProductId() {
-		return productId;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setPromotionId(Integer promotionId) {
-		this.promotionId = promotionId;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getPromotionId() {
-		return promotionId;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getAddTime() {
-		return addTime;
-	}
 }

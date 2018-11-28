@@ -1,11 +1,12 @@
 package com.personal.product.dao;
 
-import com.personal.product.domain.PromotionDO;
-
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.personal.common.MyBaseMapper;
+import com.personal.product.domain.PromotionDO;
 
 /**
  * 
@@ -14,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @date 2018-11-28 21:21:13
  */
 @Mapper
-public interface PromotionDao {
+public interface PromotionDao extends MyBaseMapper<PromotionDO>{
 
 	PromotionDO get(Integer id);
 	

@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
  * @email 1992lcg@163.com
  * @date 2018-11-27 17:27:26
  */
+@Table(name="bus_product_type")
 @Data
 @Builder
 @AllArgsConstructor
