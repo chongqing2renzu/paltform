@@ -1,5 +1,6 @@
 package com.personal.product.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.personal.common.utils.PageUtils;
 import com.personal.common.utils.Query;
@@ -55,7 +57,13 @@ public class ProductTypeController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("product:productType:add")
-	String add(){
+	String add(Model model){
+		
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("pid", 0);
+		
+		model.addAttribute("typelist", productTypeService.list(params));
+		
 	    return "product/type/add";
 	}
 
@@ -74,6 +82,7 @@ public class ProductTypeController {
 	@PostMapping("/save")
 	@RequiresPermissions("product:productType:add")
 	public R save( ProductTypeDO productType){
+		
 		if(productTypeService.save(productType)>0){
 			return R.ok();
 		}

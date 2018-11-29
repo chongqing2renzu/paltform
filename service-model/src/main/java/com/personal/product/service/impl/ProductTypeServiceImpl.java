@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.personal.product.dao.ProductTypeDao;
 import com.personal.product.domain.ProductTypeDO;
 import com.personal.product.service.ProductTypeService;
+import com.personal.utils.PinYinUtil;
 
 
 
@@ -34,6 +35,8 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 	
 	@Override
 	public int save(ProductTypeDO productType){
+		productType.setFullPy(PinYinUtil.ToPinyin(productType.getName()));
+		productType.setShortPy(PinYinUtil.ToFirstChar(productType.getName()));
 		return productTypeDao.save(productType);
 	}
 	
