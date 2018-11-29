@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.personal.product.dao.ProductDao">
+
+	<select id="get" resultType="com.personal.product.domain.ProductDO">
+		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`min_price`,`real_min_price`,`max_price`,`real_max_price`,`status`,`add_time`,`update_time`,`type` from bus_product where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.personal.product.domain.ProductDO">
+		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`min_price`,`real_min_price`,`max_price`,`real_max_price`,`status`,`add_time`,`update_time`,`type` from bus_product
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
+		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
+		  		  <if test="shopId != null and shopId != ''"> and shop_id = #{shopId} </if>
+		  		  <if test="dimensionData != null and dimensionData != ''"> and dimension_data = #{dimensionData} </if>
+		  		  <if test="minPrice != null and minPrice != ''"> and min_price = #{minPrice} </if>
+		  		  <if test="realMinPrice != null and realMinPrice != ''"> and real_min_price = #{realMinPrice} </if>
+		  		  <if test="maxPrice != null and maxPrice != ''"> and max_price = #{maxPrice} </if>
+		  		  <if test="realMaxPrice != null and realMaxPrice != ''"> and real_max_price = #{realMaxPrice} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from bus_product
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
+		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
+		  		  <if test="shopId != null and shopId != ''"> and shop_id = #{shopId} </if>
+		  		  <if test="dimensionData != null and dimensionData != ''"> and dimension_data = #{dimensionData} </if>
+		  		  <if test="minPrice != null and minPrice != ''"> and min_price = #{minPrice} </if>
+		  		  <if test="realMinPrice != null and realMinPrice != ''"> and real_min_price = #{realMinPrice} </if>
+		  		  <if test="maxPrice != null and maxPrice != ''"> and max_price = #{maxPrice} </if>
+		  		  <if test="realMaxPrice != null and realMaxPrice != ''"> and real_max_price = #{realMaxPrice} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.personal.product.domain.ProductDO">
+		insert into bus_product
+		(
+			`id`, 
+			`name`, 
+			`memo`, 
+			`pic`, 
+			`shop_id`, 
+			`dimension_data`, 
+			`min_price`, 
+			`real_min_price`, 
+			`max_price`, 
+			`real_max_price`, 
+			`status`, 
+			`add_time`, 
+			`update_time`, 
+			`type`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{memo}, 
+			#{pic}, 
+			#{shopId}, 
+			#{dimensionData}, 
+			#{minPrice}, 
+			#{realMinPrice}, 
+			#{maxPrice}, 
+			#{realMaxPrice}, 
+			#{status}, 
+			#{addTime}, 
+			#{updateTime}, 
+			#{type}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.personal.product.domain.ProductDO">
+		update bus_product 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="memo != null">`memo` = #{memo}, </if>
+			<if test="pic != null">`pic` = #{pic}, </if>
+			<if test="shopId != null">`shop_id` = #{shopId}, </if>
+			<if test="dimensionData != null">`dimension_data` = #{dimensionData}, </if>
+			<if test="minPrice != null">`min_price` = #{minPrice}, </if>
+			<if test="realMinPrice != null">`real_min_price` = #{realMinPrice}, </if>
+			<if test="maxPrice != null">`max_price` = #{maxPrice}, </if>
+			<if test="realMaxPrice != null">`real_max_price` = #{realMaxPrice}, </if>
+			<if test="status != null">`status` = #{status}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="type != null">`type` = #{type}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from bus_product where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from bus_product where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
