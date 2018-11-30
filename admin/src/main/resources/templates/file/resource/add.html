@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">图片：</label>
+								
+								<div class="col-sm-6">
+									 <img alt="" src="" id ="_img">
+								</div>
+								
+								<div class="col-sm-3">
+									<button type="button" class="layui-btn" id="test1" style="width: 100%;">
+			                            <i class="fa fa-cloud"></i>上传文件
+			                        </button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/file/resource/add.js">
+	</script>
+	
+	<!-- 全局js -->
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="/js/bootstrap-paginator.min.js"></script>
+
+<script src="/js/content.js?v=1.0.0"></script>
+<script src="/js/layui.js"></script>
+<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+<script src="/js/plugins/layer/layer.min.js"></script>
+<script src="/js/vue.min.js"></script>
+
+<script type="text/javascript">
+
+layui.use('upload', function () {
+    var upload = layui.upload;
+    //执行实例
+    var uploadInst = upload.render({
+        elem: '#test1', //绑定元素
+        url: '/file/resource/upload', //上传接口
+        size: 1000,
+        accept: 'file',
+        done: function (r) {
+            layer.msg(r.msg);
+            $("#_img").attr("src",r.resource.thumb);
+        },
+        error: function (r) {
+            layer.msg(r.msg);
+        }
+    });
+});
+</script>
+</body>
+</html>

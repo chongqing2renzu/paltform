@@ -1,12 +1,16 @@
 bootdo:
-  uploadPath: D:/var/uploaded_files/
+  uploadPath: F:\\uploaded_files\\
+  big: big\\
+  thumb: thumb\\ 
+  origin: origin\\
+  middle: middle\\
 logging:
   config: classpath:logback.xml
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/person?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://127.0.0.1:3306/bootdo?useUnicode=true&characterEncoding=utf8
     username: root
     password: 111111
     initialSize: 1

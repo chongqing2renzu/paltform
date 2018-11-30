@@ -3,7 +3,7 @@ Implementation-Title: report
 Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: Administrator
 Implementation-Vendor-Id: com.personal
-Build-Jdk: 1.8.0_144
+Build-Jdk: 1.8.0_11
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
  ot-starter-parent/personal-platform/report
 Created-By: Maven Integration for Eclipse

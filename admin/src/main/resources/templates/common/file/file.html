@@ -25,19 +25,14 @@
                         </button>
                         <div class="hr-line-dashed"></div>
                         <ul class="folder-list" style="padding: 0">
-                            <li><a href="#" class="file-control "
-                                   onclick="changeType('')"><i class="fa fa-folder"></i>所有文件</a></li>
-                            <li><a href="javascript:void(0)"
-                                   class="file-control" href="javascript:void(0)"
-                                   onclick="changeType(0)"><i class="fa fa-folder"></i>图片</a></li>
-                            <li><a href="javascript:void(0)"
-                                   onclick="changeType(1)" class="file-control"><i class="fa fa-folder"></i>文档</a></li>
-                            <li><a href="javascript:void(0)" onclick="changeType(2)"
-                                   class="file-control"><i class="fa fa-folder"></i>视频</a></li>
-                            <li><a href="javascript:void(0)"
-                                   onclick="changeType(3)" class="file-control"><i class="fa fa-folder"></i>音乐</a>
-                            <li><a href="javascript:void(0)" onclick="changeType(99)"
-                                   class="file-control"><i class="fa fa-folder"></i>其他</a></li>
+                            <li><a href="#" class="file-control" onclick="changeType(0)"><i class="fa fa-folder"></i>所有文件</a></li>
+                            <li><a href="javascript:void(0)" class="file-control" href="javascript:void(0)" onclick="changeType(0)">
+                            <i class="fa fa-folder"></i>图片</a>
+                            </li>
+                            <li><a href="javascript:void(0)" onclick="changeType(1)" class="file-control"><i class="fa fa-folder"></i>文档</a></li>
+                            <li><a href="javascript:void(0)" onclick="changeType(2)"  class="file-control"><i class="fa fa-folder"></i>视频</a></li>
+                            <li><a href="javascript:void(0)" onclick="changeType(3)" class="file-control"><i class="fa fa-folder"></i>音乐</a>
+                            <li><a href="javascript:void(0)" onclick="changeType(99)" class="file-control"><i class="fa fa-folder"></i>其他</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,7 +80,6 @@
 <script src="/js/plugins/clipboard/clipboard.min.js"></script>
 <script src="/js/plugins/layer/layer.min.js"></script>
 <script src="/js/vue.min.js"></script>
-
 <script>
     var app = new Vue({
         el: '#app',

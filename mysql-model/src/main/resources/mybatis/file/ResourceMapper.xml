@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.personal.file.dao.ResourceDao">
+
+	<select id="get" resultType="com.personal.file.domain.ResourceDO">
+		select `id`,`name`,`origin`,`thumb`,`middle`,`big`,`suffix`,`type`,`add_time`,`status` from bus_resource where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.personal.file.domain.ResourceDO">
+		select `id`,`name`,`origin`,`thumb`,`middle`,`big`,`suffix`,`type`,`add_time`,`status` from bus_resource
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="origin != null and origin != ''"> and origin = #{origin} </if>
+		  		  <if test="thumb != null and thumb != ''"> and thumb = #{thumb} </if>
+		  		  <if test="middle != null and middle != ''"> and middle = #{middle} </if>
+		  		  <if test="big != null and big != ''"> and big = #{big} </if>
+		  		  <if test="suffix != null and suffix != ''"> and suffix = #{suffix} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from bus_resource
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="origin != null and origin != ''"> and origin = #{origin} </if>
+		  		  <if test="thumb != null and thumb != ''"> and thumb = #{thumb} </if>
+		  		  <if test="middle != null and middle != ''"> and middle = #{middle} </if>
+		  		  <if test="big != null and big != ''"> and big = #{big} </if>
+		  		  <if test="suffix != null and suffix != ''"> and suffix = #{suffix} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.personal.file.domain.ResourceDO">
+		insert into bus_resource
+		(
+			`id`, 
+			`name`, 
+			`origin`, 
+			`thumb`, 
+			`middle`, 
+			`big`, 
+			`suffix`, 
+			`type`, 
+			`add_time`, 
+			`status`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{origin}, 
+			#{thumb}, 
+			#{middle}, 
+			#{big}, 
+			#{suffix}, 
+			#{type}, 
+			#{addTime}, 
+			#{status}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.personal.file.domain.ResourceDO">
+		update bus_resource 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="origin != null">`origin` = #{origin}, </if>
+			<if test="thumb != null">`thumb` = #{thumb}, </if>
+			<if test="middle != null">`middle` = #{middle}, </if>
+			<if test="big != null">`big` = #{big}, </if>
+			<if test="suffix != null">`suffix` = #{suffix}, </if>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="status != null">`status` = #{status}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from bus_resource where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from bus_resource where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -1,10 +1,10 @@
-package com.personal.product.service.impl;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+package com.personal.product.service.product.impl;
 
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.personal.product.dao.ProductDao;
 import com.personal.product.domain.ProductDO;
