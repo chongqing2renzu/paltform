@@ -10,6 +10,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.imageio.ImageIO;
 
@@ -33,7 +34,7 @@ public class ImageUtil {
      * @param rate
      *            压缩的比例
      */
-    public static String reduceImg(String imgsrc, String imgdist, int widthdist, int heightdist) {
+    public static String reduceImg(String imgsrc, String imgdist, int widthdist, int heightdist,String fileName) {
         try {
             File srcfile = new File(imgsrc);
             // 检查图片文件是否存在
@@ -42,7 +43,7 @@ public class ImageUtil {
             }
             
             File targetFile = new File(imgdist);
-    		if (!targetFile.exists()) {
+     		if (!targetFile.exists()) {
     			targetFile.mkdirs();
     		}
             
@@ -50,25 +51,25 @@ public class ImageUtil {
             //获得源图片的宽高存入数组中
             int[] results = getImgWidthHeight(srcfile);
             //改变的宽高
-            BigDecimal changeWidth = new BigDecimal(widthdist);
+             BigDecimal changeWidth = new BigDecimal(widthdist);
 //            BigDecimal changeHeigth = new BigDecimal(heightdist);
             
             //原宽高
             BigDecimal originWidth = new BigDecimal(results[0]);
-            BigDecimal originHeigth = new BigDecimal(results[1]);
+             BigDecimal originHeigth = new BigDecimal(results[1]);
             
-            BigDecimal rate = changeWidth.divide(originWidth);
+            BigDecimal rate = changeWidth.divide(originWidth,4,RoundingMode.HALF_UP);
             
             
-            if (results == null || results[0] == 0 || results[1] == 0) {
+             if (results == null || results[0] == 0 || results[1] == 0) {
                 return null;
             } else {
                 //按比例缩放或扩大图片大小，将浮点型转为整型
                 widthdist = originWidth.multiply(rate).intValue();
-                heightdist = originHeigth.multiply(rate).intValue();
+                 heightdist = originHeigth.multiply(rate).intValue();
             }
             // 开始读取文件并进行压缩
-            Image src = ImageIO.read(srcfile);
+             Image src = ImageIO.read(srcfile);
 
             // 构造一个类型为预定义图像类型之一的 BufferedImage
             BufferedImage tag = new BufferedImage((int) widthdist, (int) heightdist, BufferedImage.TYPE_INT_RGB);
@@ -78,7 +79,7 @@ public class ImageUtil {
             tag.getGraphics().drawImage(src.getScaledInstance(widthdist, heightdist, Image.SCALE_SMOOTH), 0, 0, null);
 
             //创建文件输出流
-            FileOutputStream out = new FileOutputStream(imgdist);
+            FileOutputStream out = new FileOutputStream(imgdist+fileName);
             //将图片按JPEG压缩，保存到out中
             com.sun.image.codec.jpeg.JPEGImageEncoder encoder = com.sun.image.codec.jpeg.JPEGCodec.createJPEGEncoder(out);
             encoder.encode(tag);
@@ -87,11 +88,11 @@ public class ImageUtil {
         } catch (Exception ef) {
             ef.printStackTrace();
         }
-        return imgdist;
+        return imgdist+fileName;
     }
 
     /**
-     * 获取图片宽度和高度
+                  * 获取图片宽度和高度
      * 
      * @param 图片路径
      * @return 返回图片的宽度
@@ -121,7 +122,7 @@ public class ImageUtil {
         
         
         System.out.println("压缩前图片大小：" + srcfile.length());
-        reduceImg("f://img//1.jpg", "f://img//12.jpg", 1024, 1024);
+//        reduceImg("f://img//1.jpg", "f://img//12.jpg", 1024, 1024);
         File distfile = new File("f://img//12.jpg");
         System.out.println("压缩后图片大小：" + distfile.length());
 
