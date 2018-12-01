@@ -1,4 +1,4 @@
-package com.personal.product.service.product.impl;
+package com.personal.product.service.impl;
 
 import java.util.List;
 import java.util.Map;

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-3 control-label">上级规格：</label>
+								<div class="col-sm-8">
+									<input id="pid" name="pid" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">类型：</label>
+								<div class="col-sm-8">
+									<select id="typePid" name="typePid" class="form-control" onchange="selectType(this.options[this.options.selectedIndex].value)">
+										<option>请选择</option>
+										<option th:each="type,userStat:${typeList}"
+											th:value="${type.id}" th:text="${type.name}"
+											th:selected = "${fdo!=null && type.id eq fdo.pid}"></option>
+									</select>
+									
+									<!-- <select id="typeId" name="typeId" class="form-control" th:if = "${fdo != null || fdo.typeId != fdo.typePid}">
+										<option>请选择</option>
+										<option th:each="type,userStat:${childTypeList}"
+											th:value="${type.id}" th:text="${type.name}"
+											th:selected = "${type.id == fdo.pid }"></option>
+									</select> -->
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">规格名称：</label>
+								<div class="col-sm-8">
+									<input id="name" name="name" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">规格描述：</label>
+								<div class="col-sm-8">
+									<input id="memo" name="memo" class="form-control" type="text">
+								</div>
+							</div>
+							 
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/product/dimension/add.js">
+		
+	</script>
+	<script type="text/javascript">
+		function selectType(id){
+			
+			
+			$.ajax({
+
+	             type: "GET",
+
+	             url: "/product/productType/listNoPage",
+
+	             data: {"pid":id},
+
+	             dataType: "json",
+
+	             success: function(data){
+						if(data.length > 0){
+							
+							$("#typeId").show();
+							var html = '<select id="typeId" name="typeId" class="form-control">'; 
+
+	                        $.each(data, function(commentIndex, comment){
+	                       	 html += '<option value = '+data.id+'>'+data.name+'</option>'
+	                        });
+	                        
+	                        html += '</select>'
+
+	                        $('#typePid').append(html);
+						}
+                     }
+
+	         });
+			
+		}
+	</script>
+</body>
+</html>

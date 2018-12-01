@@ -34,6 +34,8 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	private 
+	
 	@GetMapping()
 	@RequiresPermissions("product:product:product")
 	String Product(){
@@ -54,7 +56,15 @@ public class ProductController {
 	
 	@GetMapping("/add")
 	@RequiresPermissions("product:product:add")
-	String add(){
+	String add(Model model){
+		
+		//分类
+		
+		//分类所得到的规格
+		
+		//品牌
+		
+		
 	    return "product/product/add";
 	}
 

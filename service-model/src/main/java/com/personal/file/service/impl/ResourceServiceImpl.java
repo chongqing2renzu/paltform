@@ -73,12 +73,12 @@ public class ResourceServiceImpl implements ResourceService {
 			
 			resourceDO = ResourceDO.builder()
 					.addTime(new Date())
-					.big(imageVo.getBig())
-					.middle(imageVo.getMiddle())
-					.thumb(imageVo.getThumb())
+					.big(fileConfig.getUrl()+imageVo.getBig().replace(fileConfig.getUploadPath(), ""))
+					.middle(fileConfig.getUrl()+imageVo.getMiddle().replace(fileConfig.getUploadPath(), ""))
+					.thumb(fileConfig.getUrl()+imageVo.getThumb().replace(fileConfig.getUploadPath(), ""))
 					.suffix(imageVo.getSuffix())
 					.type(FileUtil.fileType(imageVo.getSuffix()))
-					.origin(imageVo.getOrigin())
+					.origin(fileConfig.getUrl()+imageVo.getOrigin().replace(fileConfig.getUploadPath(), ""))
 					.name(imageVo.getFileName())
 					.build();
 			int ret = resourceDao.insertUseGeneratedKeys(resourceDO);
@@ -101,11 +101,11 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		String [] fileStr = uploadOrigin(file);
 		
-		FileTask big = new FileTask(fileStr[0], fileConfig.getUploadPath() + fileConfig.getBig() + fileStr[1]+"_big", 1024, 1024);
+		FileTask big = new FileTask(fileStr[0]+fileStr[1], fileConfig.getUploadPath() + fileConfig.getBig() , 1024, 1024,fileStr[1].substring(0, fileStr[1].lastIndexOf("."))+"_big."+fileStr[2]);
 		
-		FileTask middle = new FileTask(fileStr[0], fileConfig.getUploadPath() + fileConfig.getMiddle() + fileStr[1]+"_middle", 512, 512);
+		FileTask middle = new FileTask(fileStr[0]+fileStr[1], fileConfig.getUploadPath() + fileConfig.getMiddle() , 512, 512,fileStr[1].substring(0, fileStr[1].lastIndexOf("."))+"_middle."+fileStr[2]);
 		
-		FileTask thumb = new FileTask(fileStr[0], fileConfig.getUploadPath() + fileConfig.getThumb() + fileStr[1]+"_thumb", 128, 128);
+		FileTask thumb = new FileTask(fileStr[0]+fileStr[1], fileConfig.getUploadPath() + fileConfig.getThumb() , 128, 128,fileStr[1].substring(0, fileStr[1].lastIndexOf("."))+"_thumb."+fileStr[2]);
 		
 		FutureTask<String> bigTask = new FutureTask<String>(big);
 		FutureTask<String> middleTask = new FutureTask<String>(middle);
@@ -118,16 +118,20 @@ public class ResourceServiceImpl implements ResourceService {
 		bigThread.start();
 		middleThread.start();
 		thumbThread.start();
-		
-		if(bigTask.isDone() && middleTask.isDone() && thumbTask.isDone()){
-			imageVo = ImageVo.builder()
-					.origin(fileStr[0])
-					.big(bigTask.get())
-					.middle(middleTask.get())
-					.thumb(thumbTask.get())
-					.suffix(fileStr[2])
-					.build();
+		while(true) {
+			if(bigTask.isDone() && middleTask.isDone() && thumbTask.isDone()){
+ 				imageVo = ImageVo.builder()
+						.origin(fileStr[0]+fileStr[1])
+						.big(bigTask.get())
+						.middle(middleTask.get())
+						.thumb(thumbTask.get())
+						.suffix(fileStr[2])
+						.fileName(fileStr[1])
+						.build();
+				break;
+			}
 		}
+		
 		
 		return imageVo;
 	}
@@ -139,9 +143,9 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		String path = fileConfig.getUploadPath() + fileConfig.getOrigin();
 		
-		String filesuffix = FileUtil.filesuffix(file.getName());
+		String filesuffix = FileUtil.filesuffix(file.getOriginalFilename());
 		
-		String fileName = FileUtil.renameToUUID(file.getName());
+		String fileName = FileUtil.renameToUUID(file.getOriginalFilename());
 		
 		try {
 			FileUtil.uploadFile(file.getBytes(), path, fileName);

@@ -49,59 +49,43 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '编号' 
 								},
 																{
 									field : 'name', 
-									title : '' 
-								},
-																{
-									field : 'memo', 
-									title : '' 
+									title : '商品名称' 
 								},
 																{
 									field : 'pic', 
-									title : '' 
-								},
-																{
-									field : 'shopId', 
-									title : '' 
-								},
-																{
-									field : 'dimensionData', 
-									title : '' 
+									title : '主图' 
 								},
 																{
 									field : 'minPrice', 
-									title : '' 
+									title : '最低价' 
 								},
 																{
 									field : 'realMinPrice', 
-									title : '' 
+									title : '最低真实价' 
 								},
 																{
 									field : 'maxPrice', 
-									title : '' 
+									title : '最高价' 
 								},
 																{
 									field : 'realMaxPrice', 
-									title : '' 
+									title : '最高真实价' 
 								},
 																{
 									field : 'status', 
-									title : '' 
+									title : '状态' 
 								},
 																{
 									field : 'addTime', 
-									title : '' 
-								},
-																{
-									field : 'updateTime', 
-									title : '' 
+									title : '添加时间' 
 								},
 																{
 									field : 'type', 
-									title : '' 
+									title : '类型' 
 								},
 																{
 									title : '操作',

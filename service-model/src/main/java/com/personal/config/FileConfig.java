@@ -28,4 +28,6 @@ public class FileConfig {
 	private String origin;
 	
 	private String middle;
+	
+	private String url;
 }

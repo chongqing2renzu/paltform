@@ -54,6 +54,19 @@ public class ProductTypeController {
 		return pageUtils;
 	}
 	
+	
+	@ResponseBody
+	@GetMapping("/listNoPage")
+	@RequiresPermissions("product:productType:productType")
+	public List<ProductTypeDO> listNoPage(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		List<ProductTypeDO> productTypeList = productTypeService.list(params);
+		
+		return productTypeList;
+	}
+	
+	
+	
 	@GetMapping("/add")
 	@RequiresPermissions("product:productType:add")
 	String add(Model model){
