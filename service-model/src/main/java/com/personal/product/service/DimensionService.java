@@ -1,9 +1,10 @@
 package com.personal.product.service;
 
-import com.personal.product.domain.DimensionDO;
-
 import java.util.List;
 import java.util.Map;
+
+import com.personal.product.domain.DimensionDO;
+import com.personal.product.vo.ProductTypeVo;
 
 /**
  * 
@@ -27,4 +28,5 @@ public interface DimensionService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+	
 }

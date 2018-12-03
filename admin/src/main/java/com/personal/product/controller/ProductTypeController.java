@@ -59,6 +59,7 @@ public class ProductTypeController {
 	@GetMapping("/listNoPage")
 	@RequiresPermissions("product:productType:productType")
 	public List<ProductTypeDO> listNoPage(@RequestParam Map<String, Object> params){
+		
 		//查询列表数据
 		List<ProductTypeDO> productTypeList = productTypeService.list(params);
 		
@@ -74,10 +75,11 @@ public class ProductTypeController {
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("pid", 0);
 		
-		model.addAttribute("typelist", productTypeService.list(params));
+		model.addAttribute("typelist", listNoPage(params));
 		
 	    return "product/type/add";
 	}
+	
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("product:productType:edit")

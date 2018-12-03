@@ -16,6 +16,6 @@ public class AdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(AdminApplication.class, args);
         System.out.println("后台已经启动好");
-               
+        
     }
 }

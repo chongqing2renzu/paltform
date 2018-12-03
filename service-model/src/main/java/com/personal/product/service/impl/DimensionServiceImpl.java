@@ -1,5 +1,6 @@
 package com.personal.product.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.personal.product.dao.DimensionDao;
 import com.personal.product.domain.DimensionDO;
 import com.personal.product.service.DimensionService;
+import com.personal.product.vo.ProductTypeVo;
 
 
 
@@ -54,5 +56,6 @@ public class DimensionServiceImpl implements DimensionService {
 	public int batchRemove(Integer[] ids){
 		return dimensionDao.batchRemove(ids);
 	}
+
 	
 }

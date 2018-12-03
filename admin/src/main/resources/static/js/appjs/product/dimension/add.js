@@ -1,6 +1,5 @@
 $().ready(function() {
 	validateRule();
-	$("#typeId").hide();
 });
 
 $.validator.setDefaults({

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.personal.product.domain.ProductTypeDO;
+import com.personal.product.vo.ProductTypeVo;
 
 /**
  * 
@@ -27,4 +28,6 @@ public interface ProductTypeService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+	
+	List<ProductTypeVo> productTypeList(Integer typeId);
 }

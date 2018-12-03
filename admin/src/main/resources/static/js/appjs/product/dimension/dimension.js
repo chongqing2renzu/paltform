@@ -42,8 +42,8 @@ var load= function(){
 												+ item.id
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										var p = '<a class="btn btn-primary btn-sm '
-												+ s_add_h
-												+ '" href="#" mce_href="#" title="添加下级" onclick="add(\''
+												+ s_child_add_h
+												+ '" href="#" mce_href="#" title="添加下级" onclick="childadd(\''
 												+ item.id
 												+ '\')"><i class="fa fa-plus"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '
@@ -67,6 +67,16 @@ function add(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
 		content : prefix + '/add' // iframe的url
+	});
+}
+function childadd(id) {
+	layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '520px' ],
+		content : prefix + '/childAdd/'+id // iframe的url
 	});
 }
 function edit(id) {

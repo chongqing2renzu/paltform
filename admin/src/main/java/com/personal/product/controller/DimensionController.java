@@ -90,6 +90,18 @@ public class DimensionController {
 		
 	    return "product/dimension/add";
 	}
+	
+	@GetMapping("/childAdd/{id}")
+	@RequiresPermissions("product:dimension:childAdd")
+	String childAdd(@PathVariable("id") Integer id,Model model){
+		
+		DimensionDO dimension = dimensionService.get(id);
+		model.addAttribute("dimension", dimension);
+		
+		model.addAttribute("productTypeList", productTypeService.productTypeList(dimension.getTypeId()));
+		
+	    return "product/dimension/child_add";
+	}
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("product:dimension:edit")
