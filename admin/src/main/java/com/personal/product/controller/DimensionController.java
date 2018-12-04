@@ -65,6 +65,26 @@ public class DimensionController {
  		return dimensionList;
 	}
 	
+	@ResponseBody
+	@GetMapping("/listByType/{typeId}")
+	@RequiresPermissions("product:dimension:dimension")
+	public List<DimensionDO> listByType(@PathVariable("typeId") Integer typeId){
+		//查询列表数据
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("typeId", typeId);
+		List<DimensionDO> dimensionList = dimensionService.list(params);
+ 		return dimensionList;
+	}
+	
+//	@ResponseBody
+//	@GetMapping("/listNoPage")
+//	@RequiresPermissions("product:dimension:dimension")
+//	public List<DimensionDO> listNoPage(@RequestParam Map<String, Object> params){
+//		//查询列表数据
+//		List<DimensionDO> dimensionList = dimensionService.list(params);
+// 		return dimensionList;
+//	}
+	
 	@GetMapping("/add")
 	@RequiresPermissions("product:dimension:add")
 	String add(Integer id,Model model){

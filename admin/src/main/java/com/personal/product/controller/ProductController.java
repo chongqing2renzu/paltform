@@ -1,5 +1,6 @@
 package com.personal.product.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,9 @@ import com.personal.common.utils.PageUtils;
 import com.personal.common.utils.Query;
 import com.personal.common.utils.R;
 import com.personal.product.domain.ProductDO;
+import com.personal.product.service.DimensionService;
 import com.personal.product.service.ProductService;
+import com.personal.product.service.ProductTypeService;
 
 /**
  * 
@@ -31,10 +34,15 @@ import com.personal.product.service.ProductService;
 @Controller
 @RequestMapping("/product/product")
 public class ProductController {
+	
 	@Autowired
 	private ProductService productService;
 	
-	private 
+	@Autowired
+	private DimensionService  dimensionService;
+	
+	@Autowired
+	private ProductTypeService productTypeService;
 	
 	@GetMapping()
 	@RequiresPermissions("product:product:product")
@@ -59,8 +67,12 @@ public class ProductController {
 	String add(Model model){
 		
 		//分类
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("pid", 0);
 		
+		model.addAttribute("typeList", productTypeService.list(map));
 		//分类所得到的规格
+		
 		
 		//品牌
 		
