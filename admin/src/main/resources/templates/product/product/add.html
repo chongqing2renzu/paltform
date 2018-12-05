@@ -45,6 +45,7 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">商品规格：</label>
+								<input type = "hidden" name = "dimensionData" id ="_dimensionData">
 								<div class="col-sm-8" id="_dimension">
 									<button class="btn btn-default" type="button" onclick = "openTree()">选择商品规格</button>
 								</div>
@@ -267,11 +268,62 @@
 		}
 		
 		function getChecked(){
+			
+			var map = {};
+			var nameMap = {};
+			var dataMap = {};
 			$.each($('input:checkbox:checked'),function(index,elem){
-				$("#_dimension").after()
-				
-                 alert($(elem).val());
+				var pid = $(elem).attr('data-pid');
+				if(pid == 0){
+					map[$(elem).attr("id")] = [];
+					nameMap[$(elem).attr("id")] = [];
+				}else{
+					map[pid].push($(elem).attr("id"));
+					nameMap[pid].push($(elem).attr("data-name"));
+					dataMap[$(elem).attr("id")] = $(elem).attr("data-name");
+				}
             });
+			
+			$("#_dimensionData").val(JSON.stringify(dataMap));
+			var nameArray = [];
+			$.each(nameMap,function(key,values){
+				nameArray = arrayMake(values,nameArray);
+			});
+			var idArray = [];
+			$.each(map,function(key,values){
+				idArray = arrayMake(values,idArray);
+			});
+			
+			for(var i=0;i<nameArray.length;i++){
+				var html = '<div class="col-sm-8">';
+				var names = nameArray[i].split("_");
+				for(var index in names){
+					html += '<span class="label label-default">'+names[index]+'</span>';
+				}
+				html += '<input class="form-control" type="text" name = "nums" />'
+			    +'<input class="form-control" type="text" name ="money"/>'+
+			    '<input class="form-control" type="hidden" name ="nameArray" value = "'+nameArray[i]+'"/>'+
+			    '<input class="form-control" type="hidden" name ="idArray" value = "'+idArray[i]+'"/>';
+				html += '</div>';
+				
+				$("#_dimension").after(html)
+			}
+			
+			
+			
+		}
+		
+		function arrayMake(originArray,array){
+			var retArray = [];
+			for(var i =0 ; i< originArray.length ;i++){
+				if(array.length < 1){
+					retArray.push(originArray[i])
+				}
+				 for(var j =0;j< array.length ;j++){
+					 retArray.push(array[j] +"_"+originArray[i]);
+				 }
+			}
+			return retArray;
 		}
 	</script>
 </body>
