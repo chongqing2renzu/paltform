@@ -1,6 +1,7 @@
 package com.personal.product.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,13 +16,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.personal.common.utils.PageUtils;
 import com.personal.common.utils.Query;
 import com.personal.common.utils.R;
+import com.personal.product.domain.BrandDO;
 import com.personal.product.domain.ProductDO;
+import com.personal.product.domain.ProductTypeDO;
+import com.personal.product.dto.AddProductDto;
+import com.personal.product.service.BrandService;
 import com.personal.product.service.DimensionService;
 import com.personal.product.service.ProductService;
 import com.personal.product.service.ProductTypeService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -30,7 +38,7 @@ import com.personal.product.service.ProductTypeService;
  * @email 1992lcg@163.com
  * @date 2018-11-29 22:01:07
  */
- 
+@Slf4j
 @Controller
 @RequestMapping("/product/product")
 public class ProductController {
@@ -43,6 +51,9 @@ public class ProductController {
 	
 	@Autowired
 	private ProductTypeService productTypeService;
+	
+	@Autowired
+	private BrandService brandService;
 	
 	@GetMapping()
 	@RequiresPermissions("product:product:product")
@@ -66,16 +77,11 @@ public class ProductController {
 	@RequiresPermissions("product:product:add")
 	String add(Model model){
 		
-		//分类
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("pid", 0);
-		
-		model.addAttribute("typeList", productTypeService.list(map));
+		model.addAttribute("typeList", productTypeService.productTypeList(ProductTypeDO.builder().pid(0).build()));
 		//分类所得到的规格
 		
-		
 		//品牌
-		
+		model.addAttribute("brandList",brandService.list(BrandDO.builder().build()));
 		
 	    return "product/product/add";
 	}
@@ -94,8 +100,9 @@ public class ProductController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("product:product:add")
-	public R save( ProductDO product){
-		if(productService.save(product)>0){
+	public R save( AddProductDto addProductDto){
+		log.info("添加商品内容为:{}",JSON.toJSONString(addProductDto));
+		if(productService.add(addProductDto)>0){
 			return R.ok();
 		}
 		return R.error();

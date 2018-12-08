@@ -1,6 +1,7 @@
 package com.personal.product.controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.personal.common.utils.R;
 import com.personal.product.domain.DimensionDO;
+import com.personal.product.domain.ProductTypeDO;
 import com.personal.product.service.DimensionService;
 import com.personal.product.service.ProductTypeService;
 
@@ -70,9 +72,7 @@ public class DimensionController {
 	@RequiresPermissions("product:dimension:dimension")
 	public List<DimensionDO> listByType(@PathVariable("typeId") Integer typeId){
 		//查询列表数据
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("typeId", typeId);
-		List<DimensionDO> dimensionList = dimensionService.list(params);
+		List<DimensionDO> dimensionList = dimensionService.list(DimensionDO.builder().typeId(typeId).build());
  		return dimensionList;
 	}
 	
@@ -102,11 +102,7 @@ public class DimensionController {
 		}
 		
 		//类型
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("pid", 0);
-		
-		
-		model.addAttribute("typeList", productTypeService.list(params));
+		model.addAttribute("typeList", productTypeService.productTypeList(ProductTypeDO.builder().pid(0).build()));
 		
 	    return "product/dimension/add";
 	}

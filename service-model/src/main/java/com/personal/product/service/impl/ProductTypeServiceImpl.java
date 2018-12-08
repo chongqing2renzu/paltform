@@ -86,5 +86,10 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 		
 		return ProductTypeVo.builder().list(productTypeDao.list(map)).typeId(typeId).pid(productTypeDO.getPid()).build();
 	}
+
+	@Override
+	public List<ProductTypeDO> productTypeList(ProductTypeDO productTypeDO) {
+		return productTypeDao.select(productTypeDO);
+	}
 	
 }

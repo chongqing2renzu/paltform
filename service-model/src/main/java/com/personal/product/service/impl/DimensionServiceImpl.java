@@ -57,5 +57,10 @@ public class DimensionServiceImpl implements DimensionService {
 		return dimensionDao.batchRemove(ids);
 	}
 
+	@Override
+	public List<DimensionDO> list(DimensionDO dimensionDO) {
+		return dimensionDao.select(dimensionDO);
+	}
+
 	
 }

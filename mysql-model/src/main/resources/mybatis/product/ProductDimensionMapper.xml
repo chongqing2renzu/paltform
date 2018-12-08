@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.personal.product.domain.ProductDimensionDO">
-		select `id`,`product_id`,`dimension_id`,`price`,`real_price`,`nums` from bus_product_dimension
+		select `id`,`product_id`,`dimension_id`,`price`,`real_price`,`nums`,`dimension_name` from bus_product_dimension
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="productId != null and productId != ''"> and product_id = #{productId} </if>

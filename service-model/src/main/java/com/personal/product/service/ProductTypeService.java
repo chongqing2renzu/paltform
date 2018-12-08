@@ -30,4 +30,6 @@ public interface ProductTypeService {
 	int batchRemove(Integer[] ids);
 	
 	List<ProductTypeVo> productTypeList(Integer typeId);
+	
+	List<ProductTypeDO> productTypeList(ProductTypeDO productTypeDO);
 }

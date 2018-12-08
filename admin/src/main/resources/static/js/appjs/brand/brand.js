@@ -1,5 +1,5 @@
 
-var prefix = "/product/product"
+var prefix = "/product/brand"
 $(function() {
 	load();
 });
@@ -49,64 +49,35 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '编号' 
+									title : '' 
 								},
 																{
 									field : 'name', 
-									title : '商品名称' 
+									title : '' 
 								},
 																{
-									field : 'pic', 
-									title : '主图' ,
-									formatter:function(value,row,index){
-										return '<img src = "'+value+'" width = "50px" height ="50px">';
-									}
+									field : 'logo', 
+									title : '' 
 								},
 																{
-									field : 'minPrice', 
-									title : '最低价' 
+									field : 'memo', 
+									title : '' 
 								},
 																{
-									field : 'realMinPrice', 
-									title : '最低真实价' 
+									field : 'fullPy', 
+									title : '' 
 								},
 																{
-									field : 'maxPrice', 
-									title : '最高价' 
+									field : 'shortPy', 
+									title : '' 
 								},
 																{
-									field : 'realMaxPrice', 
-									title : '最高真实价' 
-								},
-																{
-									field : 'status', 
-									title : '状态' ,
-									formatter:function(value,row,index){
-										var ret = "";
-										if(value = 1){
-											ret = "<span class=\"label label-success\">正常</span>";
-										}else{
-											ret = "<span class=\"label label-danger\">下架</span>";
-										}
-										return ret;
-									}
+									field : 'sort', 
+									title : '' 
 								},
 																{
 									field : 'addTime', 
-									title : '添加时间' 
-								},
-																{
-									field : 'type', 
-									title : '类型' ,
-									formatter:function(value,row,index){
-										var ret = "";
-										if(value = 1){
-											ret = "<span class=\"label label-success\">商品</span>";
-										}else{
-											ret = "<span class=\"label label-danger\">服务</span>";
-										}
-										return ret;
-									}
+									title : '' 
 								},
 																{
 									title : '操作',

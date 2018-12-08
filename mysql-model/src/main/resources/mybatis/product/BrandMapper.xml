@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.personal.product.dao.BrandDao">
+
+	<select id="get" resultType="com.personal.product.domain.BrandDO">
+		select `id`,`name`,`logo`,`memo`,`full_py`,`short_py`,`sort`,`add_time` from bus_brand where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.personal.product.domain.BrandDO">
+		select `id`,`name`,`logo`,`memo`,`full_py`,`short_py`,`sort`,`add_time` from bus_brand
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="logo != null and logo != ''"> and logo = #{logo} </if>
+		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
+		  		  <if test="fullPy != null and fullPy != ''"> and full_py = #{fullPy} </if>
+		  		  <if test="shortPy != null and shortPy != ''"> and short_py = #{shortPy} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from bus_brand
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="logo != null and logo != ''"> and logo = #{logo} </if>
+		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
+		  		  <if test="fullPy != null and fullPy != ''"> and full_py = #{fullPy} </if>
+		  		  <if test="shortPy != null and shortPy != ''"> and short_py = #{shortPy} </if>
+		  		  <if test="sort != null and sort != ''"> and sort = #{sort} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.personal.product.domain.BrandDO">
+		insert into bus_brand
+		(
+			`id`, 
+			`name`, 
+			`logo`, 
+			`memo`, 
+			`full_py`, 
+			`short_py`, 
+			`sort`, 
+			`add_time`
+		)
+		values
+		(
+			#{id}, 
+			#{name}, 
+			#{logo}, 
+			#{memo}, 
+			#{fullPy}, 
+			#{shortPy}, 
+			#{sort}, 
+			#{addTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.personal.product.domain.BrandDO">
+		update bus_brand 
+		<set>
+			<if test="name != null">`name` = #{name}, </if>
+			<if test="logo != null">`logo` = #{logo}, </if>
+			<if test="memo != null">`memo` = #{memo}, </if>
+			<if test="fullPy != null">`full_py` = #{fullPy}, </if>
+			<if test="shortPy != null">`short_py` = #{shortPy}, </if>
+			<if test="sort != null">`sort` = #{sort}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from bus_brand where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from bus_brand where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

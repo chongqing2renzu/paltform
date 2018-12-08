@@ -1,6 +1,7 @@
 package com.personal.product.service;
 
 import com.personal.product.domain.ProductDO;
+import com.personal.product.dto.AddProductDto;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface ProductService {
 	int remove(Integer id);
 	
 	int batchRemove(Integer[] ids);
+	
+	int add(AddProductDto addProductDto);
 }

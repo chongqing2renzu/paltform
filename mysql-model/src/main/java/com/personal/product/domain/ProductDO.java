@@ -4,6 +4,14 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 
 /**
@@ -13,6 +21,11 @@ import java.util.Date;
  * @email 1992lcg@163.com
  * @date 2018-11-29 22:01:07
  */
+@Table(name="bus_product")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -25,192 +38,44 @@ public class ProductDO implements Serializable {
 	//
 	private String pic;
 	//
+	@Column(name = "shop_id")
 	private Integer shopId;
 	//
+	@Column(name = "dimension_data")
 	private String dimensionData;
 	//
+	@Column(name = "min_price")
 	private BigDecimal minPrice;
 	//
+	@Column(name = "real_min_price")
 	private BigDecimal realMinPrice;
 	//
+	@Column(name = "max_price")
 	private BigDecimal maxPrice;
 	//
+	@Column(name = "real_max_price")
 	private BigDecimal realMaxPrice;
 	//
 	private Integer status;
 	//
+	@Column(name = "add_time")
 	private Date addTime;
 	//
+	@Column(name = "update_time")
 	private Date updateTime;
 	//
 	private Integer type;
 
-	/**
-	 * 设置：
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getId() {
-		return id;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getName() {
-		return name;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setMemo(String memo) {
-		this.memo = memo;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getMemo() {
-		return memo;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setPic(String pic) {
-		this.pic = pic;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getPic() {
-		return pic;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setShopId(Integer shopId) {
-		this.shopId = shopId;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getShopId() {
-		return shopId;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setDimensionData(String dimensionData) {
-		this.dimensionData = dimensionData;
-	}
-	/**
-	 * 获取：
-	 */
-	public String getDimensionData() {
-		return dimensionData;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setMinPrice(BigDecimal minPrice) {
-		this.minPrice = minPrice;
-	}
-	/**
-	 * 获取：
-	 */
-	public BigDecimal getMinPrice() {
-		return minPrice;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setRealMinPrice(BigDecimal realMinPrice) {
-		this.realMinPrice = realMinPrice;
-	}
-	/**
-	 * 获取：
-	 */
-	public BigDecimal getRealMinPrice() {
-		return realMinPrice;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setMaxPrice(BigDecimal maxPrice) {
-		this.maxPrice = maxPrice;
-	}
-	/**
-	 * 获取：
-	 */
-	public BigDecimal getMaxPrice() {
-		return maxPrice;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setRealMaxPrice(BigDecimal realMaxPrice) {
-		this.realMaxPrice = realMaxPrice;
-	}
-	/**
-	 * 获取：
-	 */
-	public BigDecimal getRealMaxPrice() {
-		return realMaxPrice;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getStatus() {
-		return status;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setAddTime(Date addTime) {
-		this.addTime = addTime;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getAddTime() {
-		return addTime;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-	/**
-	 * 获取：
-	 */
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-	/**
-	 * 设置：
-	 */
-	public void setType(Integer type) {
-		this.type = type;
-	}
-	/**
-	 * 获取：
-	 */
-	public Integer getType() {
-		return type;
-	}
+	@Column(name = "type_pid")
+	private Integer typePid;
+	
+	@Column(name = "type_id")
+	private Integer typeId;
+	
+	@Column(name = "brand_id")
+	private Integer brandId;
+	
+	@Column(name = "brand_name")
+	private String brandName;
+	 
 }

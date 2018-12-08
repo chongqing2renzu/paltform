@@ -29,4 +29,6 @@ public interface DimensionService {
 	
 	int batchRemove(Integer[] ids);
 	
+	List<DimensionDO> list(DimensionDO dimensionDO);
+	
 }

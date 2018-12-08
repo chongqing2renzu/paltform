@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
  * @email 1992lcg@163.com
  * @date 2018-11-28 21:21:13
  */
-@Table(name="ProductDimensionDO")
+@Table(name="bus_product_dimension")
 @Data
 @Builder
 @AllArgsConstructor
@@ -33,13 +33,15 @@ public class ProductDimensionDO implements Serializable {
 	//
 	private Integer productId;
 	//
-	private Integer dimensionId;
+	private String dimensionId;
 	//
 	private BigDecimal price;
 	//
 	private BigDecimal realPrice;
 	//
 	private Integer nums;
+	
+	private String dimensionName;
 
 	 
 }

@@ -18,35 +18,36 @@ import lombok.NoArgsConstructor;
  * 
  * @author wb
  * @email 1992lcg@163.com
- * @date 2018-12-02 15:56:54
+ * @date 2018-12-08 11:21:42
  */
+@Table(name ="bus_product_resource")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name="bus_dimension")
-public class DimensionDO implements Serializable {
+public class ProductResourceDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//
 	private Integer id;
+	
+	@Column(name="product_id")
+	private Integer productId;
 	//
-	private Integer pid;
+	private Integer type;
 	//
-	@Column(name = "type_pid")
-	private Integer typePid;
+	private String suffix;
 	//
-	private Integer typeId;
+	private String folder;
 	//
-	private String name;
+	private String thumb;
 	//
-	private String memo;
+	private String middle;
 	//
-	@Column(name = "add_time")
+	private String big;
+	//
+	private String origin;
+	//
 	private Date addTime;
-	//
-	@Column(name = "update_time")
-	private Date updateTime;
 
-	 
 }

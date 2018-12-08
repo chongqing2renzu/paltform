@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.personal.product.dao.ProductResourceDao">
+
+	<select id="get" resultType="com.personal.product.domain.ProductResourceDO">
+		select `id`,`type`,`suffix`,`folder`,`thumb`,`middle`,`big`,`origin`,`add_time`,`product_id` from bus_product_resource where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.personal.product.domain.ProductResourceDO">
+		select `id`,`type`,`suffix`,`folder`,`thumb`,`middle`,`big`,`origin`,`add_time`,`product_id` from bus_product_resource
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="suffix != null and suffix != ''"> and suffix = #{suffix} </if>
+		  		  <if test="folder != null and folder != ''"> and folder = #{folder} </if>
+		  		  <if test="thumb != null and thumb != ''"> and thumb = #{thumb} </if>
+		  		  <if test="middle != null and middle != ''"> and middle = #{middle} </if>
+		  		  <if test="big != null and big != ''"> and big = #{big} </if>
+		  		  <if test="origin != null and origin != ''"> and origin = #{origin} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from bus_product_resource
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="type != null and type != ''"> and type = #{type} </if>
+		  		  <if test="suffix != null and suffix != ''"> and suffix = #{suffix} </if>
+		  		  <if test="folder != null and folder != ''"> and folder = #{folder} </if>
+		  		  <if test="thumb != null and thumb != ''"> and thumb = #{thumb} </if>
+		  		  <if test="middle != null and middle != ''"> and middle = #{middle} </if>
+		  		  <if test="big != null and big != ''"> and big = #{big} </if>
+		  		  <if test="origin != null and origin != ''"> and origin = #{origin} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.personal.product.domain.ProductResourceDO">
+		insert into bus_product_resource
+		(
+			`id`, 
+			`type`, 
+			`suffix`, 
+			`folder`, 
+			`thumb`, 
+			`middle`, 
+			`big`, 
+			`origin`, 
+			`add_time`
+		)
+		values
+		(
+			#{id}, 
+			#{type}, 
+			#{suffix}, 
+			#{folder}, 
+			#{thumb}, 
+			#{middle}, 
+			#{big}, 
+			#{origin}, 
+			#{addTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.personal.product.domain.ProductResourceDO">
+		update bus_product_resource 
+		<set>
+			<if test="type != null">`type` = #{type}, </if>
+			<if test="suffix != null">`suffix` = #{suffix}, </if>
+			<if test="folder != null">`folder` = #{folder}, </if>
+			<if test="thumb != null">`thumb` = #{thumb}, </if>
+			<if test="middle != null">`middle` = #{middle}, </if>
+			<if test="big != null">`big` = #{big}, </if>
+			<if test="origin != null">`origin` = #{origin}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from bus_product_resource where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from bus_product_resource where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
