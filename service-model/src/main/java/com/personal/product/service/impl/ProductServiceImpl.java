@@ -20,7 +20,6 @@ import com.personal.product.domain.ProductDO;
 import com.personal.product.domain.ProductDimensionDO;
 import com.personal.product.domain.ProductResourceDO;
 import com.personal.product.dto.AddProductDto;
-import com.personal.product.dto.AddProductDto.Product;
 import com.personal.product.service.ProductService;
 
 import tk.mybatis.mapper.entity.Condition;
@@ -91,46 +90,11 @@ public class ProductServiceImpl implements ProductService {
 		
 		List<ResourceDO> list = resourceDao.selectByCondition(condition);
 		
-		BigDecimal minMoney = null;
-		BigDecimal maxMoney = null;
-		
-		BigDecimal realMinMoney = null;
-		BigDecimal realMaxMoney = null;
-		
-		for(Product p : v.getProducts()){
-			if(minMoney == null 
-			   ||maxMoney == null
-			   ||realMinMoney == null 
-			   ||realMaxMoney == null){
-				minMoney = p.getMoney();
-				maxMoney = p.getMoney();
-				realMinMoney = p.getRealMoney();
-				realMaxMoney = p.getRealMoney();
-			} else {
-				if(minMoney.compareTo(p.getMoney()) > 0){
-					minMoney = p.getMoney();
-				}
-				
-				if(maxMoney.compareTo(p.getMoney()) < 0){
-					maxMoney = p.getMoney();
-				}
-				
-				if(realMinMoney.compareTo(p.getRealMoney()) > 0){
-					realMinMoney = p.getRealMoney();
-				}
-				
-				if(realMaxMoney.compareTo(p.getRealMoney()) < 0){
-					realMaxMoney = p.getRealMoney();
-				}
-				
-			}
-		}
-		
 		//新增商品
 		ProductDO productDO = ProductDO.builder()
 			.addTime(new Date())
-			.brandId(v.getBrandId())
-			.brandName(v.getBrandName())
+			.brandId(v.getType() == 1 ? v.getBrandId() : null)
+			.brandName(v.getType() == 1 ? v.getBrandName() : null)
 			.dimensionData(v.getDimensionData())
 			.memo(v.getMemo())
 			.name(v.getName())
@@ -140,10 +104,9 @@ public class ProductServiceImpl implements ProductService {
 			.type(v.getType())
 			.typeId(v.getTypeId())
 			.typePid(v.getTypePid())
-			.minPrice(minMoney)
-			.maxPrice(maxMoney)
-			.realMinPrice(realMinMoney)
-			.realMaxPrice(realMaxMoney)
+			.cash(v.getType() == 2 ? v.getCash() : BigDecimal.ZERO)
+			.price(v.getPrice())
+			.realPrice(v.getRealPrice())
 			.build();
 		
 		int ret = productDao.insertUseGeneratedKeys(productDO);
@@ -173,19 +136,19 @@ public class ProductServiceImpl implements ProductService {
 		productResourceDao.insertList(productResourcesList);
 		
 		//规格添加
-		List<ProductDimensionDO> productDimensionDOList = new ArrayList<ProductDimensionDO>();
+//		List<ProductDimensionDO> productDimensionDOList = new ArrayList<ProductDimensionDO>();
+//		
+//		v.getProducts().forEach(p ->{
+//			productDimensionDOList.add(ProductDimensionDO.builder()
+//					.dimensionId(p.getIdArray())
+//					.dimensionName(p.getNameArray())
+//					.nums(p.getNums())
+//					.price(p.getMoney())
+//					.realPrice(p.getRealMoney())
+//					.build());
+//		});
 		
-		v.getProducts().forEach(p ->{
-			productDimensionDOList.add(ProductDimensionDO.builder()
-					.dimensionId(p.getIdArray())
-					.dimensionName(p.getNameArray())
-					.nums(p.getNums())
-					.price(p.getMoney())
-					.realPrice(p.getRealMoney())
-					.build());
-		});
-		
-		productDimensionDao.insertList(productDimensionDOList);
+//		productDimensionDao.insertList(productDimensionDOList);
 		
 		return ret;
 	}

@@ -1,5 +1,8 @@
 $().ready(function() {
 	validateRule();
+	
+	$("#_brandNameDiv").hide();
+	$("#_cashdiv").hide();
 });
 
 $.validator.setDefaults({

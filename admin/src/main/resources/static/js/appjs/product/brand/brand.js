@@ -49,31 +49,30 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '编号' 
 								},
 																{
 									field : 'name', 
-									title : '' 
+									title : '品牌名称' 
 								},
 																{
 									field : 'logo', 
-									title : '' 
+									title : 'logo',
+									formatter:function(value,row,index){
+										return '<img src = "'+value+'" width = "50px" height ="50px">';
+									}
 								},
 																{
 									field : 'memo', 
-									title : '' 
+									title : '备注' 
 								},
 																{
 									field : 'fullPy', 
-									title : '' 
+									title : '全拼' 
 								},
 																{
 									field : 'shortPy', 
-									title : '' 
-								},
-																{
-									field : 'sort', 
-									title : '' 
+									title : '简拼' 
 								},
 																{
 									field : 'addTime', 

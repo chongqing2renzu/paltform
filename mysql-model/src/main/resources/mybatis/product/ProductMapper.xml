@@ -4,11 +4,11 @@
 <mapper namespace="com.personal.product.dao.ProductDao">
 
 	<select id="get" resultType="com.personal.product.domain.ProductDO">
-		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`min_price`,`real_min_price`,`max_price`,`real_max_price`,`status`,`add_time`,`update_time`,`type` from bus_product where id = #{value}
+		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`price`,`real_price`,`cash`,`status`,`add_time`,`update_time`,`type` from bus_product where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.personal.product.domain.ProductDO">
-		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`min_price`,`real_min_price`,`max_price`,`real_max_price`,`status`,`add_time`,`update_time`,`type` from bus_product
+		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`price`,`real_price`,`cash`,`status`,`add_time`,`update_time`,`type` from bus_product
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
@@ -16,10 +16,9 @@
 		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
 		  		  <if test="shopId != null and shopId != ''"> and shop_id = #{shopId} </if>
 		  		  <if test="dimensionData != null and dimensionData != ''"> and dimension_data = #{dimensionData} </if>
-		  		  <if test="minPrice != null and minPrice != ''"> and min_price = #{minPrice} </if>
-		  		  <if test="realMinPrice != null and realMinPrice != ''"> and real_min_price = #{realMinPrice} </if>
-		  		  <if test="maxPrice != null and maxPrice != ''"> and max_price = #{maxPrice} </if>
-		  		  <if test="realMaxPrice != null and realMaxPrice != ''"> and real_max_price = #{realMaxPrice} </if>
+		  		  <if test="Price != null and Price != ''"> and price = #{Price} </if>
+		  		  <if test="realPrice != null and realPrice != ''"> and real_price = #{realPrice} </if>
+		  		  <if test="cash != null and cash != ''"> and cash = #{cash} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -47,10 +46,9 @@
 		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
 		  		  <if test="shopId != null and shopId != ''"> and shop_id = #{shopId} </if>
 		  		  <if test="dimensionData != null and dimensionData != ''"> and dimension_data = #{dimensionData} </if>
-		  		  <if test="minPrice != null and minPrice != ''"> and min_price = #{minPrice} </if>
-		  		  <if test="realMinPrice != null and realMinPrice != ''"> and real_min_price = #{realMinPrice} </if>
-		  		  <if test="maxPrice != null and maxPrice != ''"> and max_price = #{maxPrice} </if>
-		  		  <if test="realMaxPrice != null and realMaxPrice != ''"> and real_max_price = #{realMaxPrice} </if>
+		  		  <if test="Price != null and Price != ''"> and price = #{Price} </if>
+		  		  <if test="realPrice != null and realPrice != ''"> and real_price = #{realPrice} </if>
+		  		  <if test="cash != null and cash != ''"> and cash = #{cash} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>
 		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
 		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
@@ -67,10 +65,10 @@
 			`pic`, 
 			`shop_id`, 
 			`dimension_data`, 
-			`min_price`, 
-			`real_min_price`, 
-			`max_price`, 
-			`real_max_price`, 
+			`price`, 
+			`real_price`, 
+			 
+			`cash`, 
 			`status`, 
 			`add_time`, 
 			`update_time`, 
@@ -84,10 +82,9 @@
 			#{pic}, 
 			#{shopId}, 
 			#{dimensionData}, 
-			#{minPrice}, 
-			#{realMinPrice}, 
-			#{maxPrice}, 
-			#{realMaxPrice}, 
+			#{Price}, 
+			#{realPrice}, 
+			#{cash}, 
 			#{status}, 
 			#{addTime}, 
 			#{updateTime}, 
@@ -103,10 +100,9 @@
 			<if test="pic != null">`pic` = #{pic}, </if>
 			<if test="shopId != null">`shop_id` = #{shopId}, </if>
 			<if test="dimensionData != null">`dimension_data` = #{dimensionData}, </if>
-			<if test="minPrice != null">`min_price` = #{minPrice}, </if>
-			<if test="realMinPrice != null">`real_min_price` = #{realMinPrice}, </if>
-			<if test="maxPrice != null">`max_price` = #{maxPrice}, </if>
-			<if test="realMaxPrice != null">`real_max_price` = #{realMaxPrice}, </if>
+			<if test="Price != null">`price` = #{Price}, </if>
+			<if test="realPrice != null">`real_price` = #{realPrice}, </if>
+			<if test="cash != null">`cash` = #{cash}, </if>
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="addTime != null">`add_time` = #{addTime}, </if>
 			<if test="updateTime != null">`update_time` = #{updateTime}, </if>

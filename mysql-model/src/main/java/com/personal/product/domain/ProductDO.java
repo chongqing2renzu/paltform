@@ -44,17 +44,14 @@ public class ProductDO implements Serializable {
 	@Column(name = "dimension_data")
 	private String dimensionData;
 	//
-	@Column(name = "min_price")
-	private BigDecimal minPrice;
+	@Column(name = "price")
+	private BigDecimal price;
 	//
-	@Column(name = "real_min_price")
-	private BigDecimal realMinPrice;
+	@Column(name = "real_price")
+	private BigDecimal realPrice;
 	//
-	@Column(name = "max_price")
-	private BigDecimal maxPrice;
-	//
-	@Column(name = "real_max_price")
-	private BigDecimal realMaxPrice;
+	@Column(name = "cash")
+	private BigDecimal cash;
 	//
 	private Integer status;
 	//

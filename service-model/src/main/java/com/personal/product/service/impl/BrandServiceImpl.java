@@ -9,6 +9,7 @@ import java.util.Map;
 import com.personal.product.dao.BrandDao;
 import com.personal.product.domain.BrandDO;
 import com.personal.product.service.BrandService;
+import com.personal.utils.PinYinUtil;
 
 
 
@@ -34,6 +35,11 @@ public class BrandServiceImpl implements BrandService {
 	
 	@Override
 	public int save(BrandDO brand){
+		if(brand != null){
+			brand.setFullPy(PinYinUtil.ToPinyin(brand.getName()));
+			brand.setShortPy(PinYinUtil.ToFirstChar(brand.getName()));
+		}
+		
 		return brandDao.save(brand);
 	}
 	

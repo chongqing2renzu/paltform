@@ -63,20 +63,16 @@ function load() {
 									}
 								},
 																{
-									field : 'minPrice', 
-									title : '最低价' 
+									field : 'price', 
+									title : '原价' 
 								},
 																{
-									field : 'realMinPrice', 
-									title : '最低真实价' 
+									field : 'realPrice', 
+									title : '折后价' 
 								},
 																{
-									field : 'maxPrice', 
-									title : '最高价' 
-								},
-																{
-									field : 'realMaxPrice', 
-									title : '最高真实价' 
+									field : 'cash', 
+									title : '定金' 
 								},
 																{
 									field : 'status', 
