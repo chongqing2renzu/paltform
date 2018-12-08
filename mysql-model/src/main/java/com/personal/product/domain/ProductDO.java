@@ -74,5 +74,8 @@ public class ProductDO implements Serializable {
 	
 	@Column(name = "brand_name")
 	private String brandName;
+	
+	@Column(name = "slod_nums")
+	private Integer slodNums;
 	 
 }

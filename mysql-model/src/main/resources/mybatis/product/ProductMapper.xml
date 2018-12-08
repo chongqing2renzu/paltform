@@ -8,7 +8,7 @@
 	</select>
 
 	<select id="list" resultType="com.personal.product.domain.ProductDO">
-		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`price`,`real_price`,`cash`,`status`,`add_time`,`update_time`,`type` from bus_product
+		select `id`,`name`,`memo`,`pic`,`shop_id`,`dimension_data`,`price`,`real_price`,`cash`,`status`,`add_time`,`update_time`,`type`,`slod_nums` from bus_product
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="name != null and name != ''"> and name = #{name} </if>
