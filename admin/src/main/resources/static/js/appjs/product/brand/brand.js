@@ -76,7 +76,7 @@ function load() {
 								},
 																{
 									field : 'addTime', 
-									title : '' 
+									title : '添加时间' 
 								},
 																{
 									title : '操作',

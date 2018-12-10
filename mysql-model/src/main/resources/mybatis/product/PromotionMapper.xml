@@ -4,25 +4,20 @@
 <mapper namespace="com.personal.product.dao.PromotionDao">
 
 	<select id="get" resultType="com.personal.product.domain.PromotionDO">
-		select `id`,`name`,`memo`,`is_all`,`type`,`overflow`,`reduce`,`discount`,`add_time`,`update_time`,`start_time`,`end_time`,`status` from bus_promotion where id = #{value}
+		select `id`,`title`,`price`,`start_time`,`end_time`,`content`,`add_time`,`update_time` from bus_promotion where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.personal.product.domain.PromotionDO">
-		select `id`,`name`,`memo`,`is_all`,`type`,`overflow`,`reduce`,`discount`,`add_time`,`update_time`,`start_time`,`end_time`,`status` from bus_promotion
+		select `id`,`title`,`price`,`start_time`,`end_time`,`content`,`add_time`,`update_time` from bus_promotion
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
-		  		  <if test="isAll != null and isAll != ''"> and is_all = #{isAll} </if>
-		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="overflow != null and overflow != ''"> and overflow = #{overflow} </if>
-		  		  <if test="reduce != null and reduce != ''"> and reduce = #{reduce} </if>
-		  		  <if test="discount != null and discount != ''"> and discount = #{discount} </if>
-		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
 		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
 		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -41,18 +36,13 @@
 		select count(*) from bus_promotion
 		 <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
-		  		  <if test="memo != null and memo != ''"> and memo = #{memo} </if>
-		  		  <if test="isAll != null and isAll != ''"> and is_all = #{isAll} </if>
-		  		  <if test="type != null and type != ''"> and type = #{type} </if>
-		  		  <if test="overflow != null and overflow != ''"> and overflow = #{overflow} </if>
-		  		  <if test="reduce != null and reduce != ''"> and reduce = #{reduce} </if>
-		  		  <if test="discount != null and discount != ''"> and discount = #{discount} </if>
-		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
-		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
+		  		  <if test="title != null and title != ''"> and title = #{title} </if>
+		  		  <if test="price != null and price != ''"> and price = #{price} </if>
 		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
 		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
-		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="updateTime != null and updateTime != ''"> and update_time = #{updateTime} </if>
 		  		</where>
 	</select>
 	 
@@ -60,52 +50,37 @@
 		insert into bus_promotion
 		(
 			`id`, 
-			`name`, 
-			`memo`, 
-			`is_all`, 
-			`type`, 
-			`overflow`, 
-			`reduce`, 
-			`discount`, 
-			`add_time`, 
-			`update_time`, 
+			`title`, 
+			`price`, 
 			`start_time`, 
 			`end_time`, 
-			`status`
+			`content`, 
+			`add_time`, 
+			`update_time`
 		)
 		values
 		(
 			#{id}, 
-			#{name}, 
-			#{memo}, 
-			#{isAll}, 
-			#{type}, 
-			#{overflow}, 
-			#{reduce}, 
-			#{discount}, 
-			#{addTime}, 
-			#{updateTime}, 
+			#{title}, 
+			#{price}, 
 			#{startTime}, 
 			#{endTime}, 
-			#{status}
+			#{content}, 
+			#{addTime}, 
+			#{updateTime}
 		)
 	</insert>
 	 
 	<update id="update" parameterType="com.personal.product.domain.PromotionDO">
 		update bus_promotion 
 		<set>
-			<if test="name != null">`name` = #{name}, </if>
-			<if test="memo != null">`memo` = #{memo}, </if>
-			<if test="isAll != null">`is_all` = #{isAll}, </if>
-			<if test="type != null">`type` = #{type}, </if>
-			<if test="overflow != null">`overflow` = #{overflow}, </if>
-			<if test="reduce != null">`reduce` = #{reduce}, </if>
-			<if test="discount != null">`discount` = #{discount}, </if>
-			<if test="addTime != null">`add_time` = #{addTime}, </if>
-			<if test="updateTime != null">`update_time` = #{updateTime}, </if>
+			<if test="title != null">`title` = #{title}, </if>
+			<if test="price != null">`price` = #{price}, </if>
 			<if test="startTime != null">`start_time` = #{startTime}, </if>
 			<if test="endTime != null">`end_time` = #{endTime}, </if>
-			<if test="status != null">`status` = #{status}</if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="updateTime != null">`update_time` = #{updateTime}</if>
 		</set>
 		where id = #{id}
 	</update>

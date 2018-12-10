@@ -75,7 +75,6 @@
 										accept : 'file',
 										done : function(r) {
 											layer.msg(r.msg);
-											layer.msg(r.data);
 											$("#test1")
 													.after(
 															"<a href=''#' class='thumbnail' ><img src = '"+r.resource.thumb+"' style = 'width:128px;height:128px'/> </a><input name = 'logo' type='hidden' value='"+r.resource.thumb+"'/><input name = 'logoResourceId' type='hidden' value='"+r.resource.id+"'/>");

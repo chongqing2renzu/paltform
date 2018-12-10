@@ -49,55 +49,31 @@ function load() {
 								},
 																{
 									field : 'id', 
-									title : '' 
+									title : '编号' 
 								},
 																{
-									field : 'name', 
-									title : '' 
+									field : 'title', 
+									title : '标题' 
 								},
 																{
-									field : 'memo', 
-									title : '' 
-								},
-																{
-									field : 'isAll', 
-									title : '' 
-								},
-																{
-									field : 'type', 
-									title : '' 
-								},
-																{
-									field : 'overflow', 
-									title : '' 
-								},
-																{
-									field : 'reduce', 
-									title : '' 
-								},
-																{
-									field : 'discount', 
-									title : '' 
-								},
-																{
-									field : 'addTime', 
-									title : '' 
-								},
-																{
-									field : 'updateTime', 
-									title : '' 
+									field : 'price', 
+									title : '价格' 
 								},
 																{
 									field : 'startTime', 
-									title : '' 
+									title : '开始时间' 
 								},
 																{
 									field : 'endTime', 
-									title : '' 
+									title : '结束时间' 
 								},
 																{
-									field : 'status', 
-									title : '' 
+									field : 'addTime', 
+									title : '添加时间' 
+								},
+																{
+									field : 'updateTime', 
+									title : '修改时间' 
 								},
 																{
 									title : '操作',

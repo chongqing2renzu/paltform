@@ -1,21 +1,20 @@
 package com.personal.product.dao;
 
+import com.personal.product.domain.PromotionDO;
+
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.personal.common.MyBaseMapper;
-import com.personal.product.domain.PromotionDO;
-
 /**
  * 
  * @author wb
  * @email 1992lcg@163.com
- * @date 2018-11-28 21:21:13
+ * @date 2018-12-10 16:23:48
  */
 @Mapper
-public interface PromotionDao extends MyBaseMapper<PromotionDO>{
+public interface PromotionDao {
 
 	PromotionDO get(Integer id);
 	

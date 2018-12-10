@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.personal.banner.dao.BannerDao">
+
+	<select id="get" resultType="com.personal.banner.domain.BannerDO">
+		select `id`,`pic`,`url`,`content`,`start_time`,`end_time`,`add_time`,`status` from bus_banner where id = #{value}
+	</select>
+
+	<select id="list" resultType="com.personal.banner.domain.BannerDO">
+		select `id`,`pic`,`url`,`content`,`start_time`,`end_time`,`add_time`,`status`,`resource_id` from bus_banner
+        <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from bus_banner
+		 <where>  
+		  		  <if test="id != null and id != ''"> and id = #{id} </if>
+		  		  <if test="pic != null and pic != ''"> and pic = #{pic} </if>
+		  		  <if test="url != null and url != ''"> and url = #{url} </if>
+		  		  <if test="content != null and content != ''"> and content = #{content} </if>
+		  		  <if test="startTime != null and startTime != ''"> and start_time = #{startTime} </if>
+		  		  <if test="endTime != null and endTime != ''"> and end_time = #{endTime} </if>
+		  		  <if test="addTime != null and addTime != ''"> and add_time = #{addTime} </if>
+		  		  <if test="status != null and status != ''"> and status = #{status} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.personal.banner.domain.BannerDO">
+		insert into bus_banner
+		(
+			`id`, 
+			`pic`, 
+			`url`, 
+			`content`, 
+			`start_time`, 
+			`end_time`, 
+			`add_time`, 
+			`status`,
+			`resource_id`
+		)
+		values
+		(
+			#{id}, 
+			#{pic}, 
+			#{url}, 
+			#{content}, 
+			#{startTime}, 
+			#{endTime}, 
+			#{addTime}, 
+			#{status},
+			#{resourceId}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.personal.banner.domain.BannerDO">
+		update bus_banner 
+		<set>
+			<if test="pic != null">`pic` = #{pic}, </if>
+			<if test="url != null">`url` = #{url}, </if>
+			<if test="content != null">`content` = #{content}, </if>
+			<if test="startTime != null">`start_time` = #{startTime}, </if>
+			<if test="endTime != null">`end_time` = #{endTime}, </if>
+			<if test="addTime != null">`add_time` = #{addTime}, </if>
+			<if test="status != null">`status` = #{status},</if>
+			<if test="resourceId != null">`resource_id` = #{resourceId}</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from bus_banner where id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from bus_banner where id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
