@@ -31,5 +31,6 @@ public interface ResourceService {
 	int batchRemove(Integer[] ids);
 	
     ResourceDO uploadAndSave(MultipartFile file) throws Exception;
-	
+    
+    String uploadOne(MultipartFile file)throws Exception;
 }

@@ -37,11 +37,17 @@
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
 				var s_resetPwd_h = 'hidden';
+				var s_child_add_h = 'hidden';
 			</script>
 		</div>
 		<div shiro:hasPermission="product:productType:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="product:productType:childAdd">
+			<script type="text/javascript">
+				s_child_add_h = '';
 			</script>
 		</div>
 		<div shiro:hasPermission="product:productType:remove">

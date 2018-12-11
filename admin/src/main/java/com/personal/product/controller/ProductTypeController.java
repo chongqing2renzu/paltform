@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.personal.common.utils.PageUtils;
 import com.personal.common.utils.Query;
 import com.personal.common.utils.R;
+import com.personal.product.domain.DimensionDO;
 import com.personal.product.domain.ProductTypeDO;
 import com.personal.product.service.ProductTypeService;
 
@@ -72,14 +73,20 @@ public class ProductTypeController {
 	@RequiresPermissions("product:productType:add")
 	String add(Model model){
 		
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("pid", 0);
-		
-		model.addAttribute("typelist", listNoPage(params));
+		model.addAttribute("typelist", productTypeService.productTypeList(ProductTypeDO.builder().pid(0).build()));
 		
 	    return "product/type/add";
 	}
 	
+	@GetMapping("/childAdd/{id}")
+	@RequiresPermissions("product:productType:childAdd")
+	String childAdd(@PathVariable("id") Integer id,Model model){
+		
+		ProductTypeDO productType = productTypeService.get(id);
+		model.addAttribute("productType", productType);
+		
+	    return "product/type/child_add";
+	}
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("product:productType:edit")

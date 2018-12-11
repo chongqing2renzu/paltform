@@ -1,10 +1,11 @@
 package com.personal.product.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.personal.product.dao.PromotionDao;
 import com.personal.product.domain.PromotionDO;
@@ -34,6 +35,7 @@ public class PromotionServiceImpl implements PromotionService {
 	
 	@Override
 	public int save(PromotionDO promotion){
+		promotion.setAddTime(new Date());
 		return promotionDao.save(promotion);
 	}
 	

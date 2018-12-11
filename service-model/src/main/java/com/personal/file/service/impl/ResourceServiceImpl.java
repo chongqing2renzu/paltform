@@ -160,6 +160,22 @@ public class ResourceServiceImpl implements ResourceService {
 		
 		return fileStr;
 	}
+
+	@Override
+	public String uploadOne(MultipartFile file) throws Exception {
+		String [] fileStr = uploadOrigin(file);
+		String origin = fileStr[0]+fileStr[1];
+		String img = fileConfig.getUrl()+origin.replace(fileConfig.getUploadPath(), "");
+		ResourceDO resourceDO = ResourceDO.builder()
+				.addTime(new Date())
+				.suffix(fileStr[2])
+				.type(FileUtil.fileType(fileStr[2]))
+				.origin(img)
+				.name(fileStr[1])
+				.build();
+		resourceDao.insert(resourceDO);
+		return img;
+	}
 	
 	 
 }

@@ -1,5 +1,6 @@
 package com.personal.file.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -133,6 +134,21 @@ public class ResourceController {
 		}
 		
 		return R.error();
+	}
+	
+	@ResponseBody
+	@PostMapping("/uploadOne")
+	Map<String,String> uploadOne(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		try {
+			Map<String,String> map = new HashMap<String,String>();
+			map.put("url", resourceService.uploadOne(file));
+			map.put("state", "SUCCESS");
+			return map;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 }

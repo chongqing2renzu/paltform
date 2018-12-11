@@ -150,6 +150,10 @@
 			<groupId>org.thymeleaf</groupId>
 			<artifactId>thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>com.gitee.qdbp.thirdparty</groupId>
+		    <artifactId>ueditor</artifactId>
+		</dependency>
 
 	</dependencies>
 	 <build>

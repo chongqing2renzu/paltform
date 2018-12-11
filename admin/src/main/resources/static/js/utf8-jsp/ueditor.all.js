@@ -8020,13 +8020,21 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             var actionName = this.getOpt(action) || action,
                 imageUrl = this.getOpt('imageUrl'),
                 serverUrl = this.getOpt('serverUrl');
+            
+//            if(actionName == 'imageActionName'){
+//            	serverUrl = this.getOpt('imageUrlPrefix')+actionName;
+//            	return utils.formatUrl(serverUrl);
+//            }
 
             if(!serverUrl && imageUrl) {
                 serverUrl = imageUrl.replace(/^(.*[\/]).+([\.].+)$/, '$1controller$2');
             }
+            
 
             if(serverUrl) {
+            	serverUrl = serverUrl + actionName;
                 serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
+//            	 serverUrl = serverUrl + actionName;
                 return utils.formatUrl(serverUrl);
             } else {
                 return '';
