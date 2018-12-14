@@ -14,6 +14,7 @@
 		<module>utils</module>
 		<module>common</module>
 		<module>service-model</module>
+		<module>front</module>
 	</modules>
 
 	<parent>

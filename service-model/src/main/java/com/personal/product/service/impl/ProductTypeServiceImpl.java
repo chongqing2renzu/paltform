@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,9 @@ import com.personal.product.domain.ProductTypeDO;
 import com.personal.product.service.ProductTypeService;
 import com.personal.product.vo.ProductTypeVo;
 import com.personal.utils.PinYinUtil;
+
+import tk.mybatis.mapper.entity.Condition;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 
 
@@ -90,6 +94,30 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 	@Override
 	public List<ProductTypeDO> productTypeList(ProductTypeDO productTypeDO) {
 		return productTypeDao.select(productTypeDO);
+	}
+	
+	@Override
+	public List<ProductTypeDO> productTypeListLike(ProductTypeDO productTypeDO) {
+		
+		Condition condition = new Condition(ProductTypeDO.class);
+		Criteria criteria = condition.createCriteria();
+		if(StringUtils.isNoneBlank(productTypeDO.getFullPy())){
+			criteria.andLike("fullPy", productTypeDO.getFullPy());
+		}
+		
+		if(StringUtils.isNoneBlank(productTypeDO.getShortPy())){
+			criteria.andLike("shortPy", productTypeDO.getShortPy());
+		}
+		
+		if(StringUtils.isNoneBlank(productTypeDO.getName())){
+			criteria.andLike("name", productTypeDO.getName());
+		}
+		
+		if(productTypeDO.getPid() != null){
+			criteria.andEqualTo("pid", productTypeDO.getPic());
+		}
+		
+		return productTypeDao.selectByCondition(condition);
 	}
 	
 }

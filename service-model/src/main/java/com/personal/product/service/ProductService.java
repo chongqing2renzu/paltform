@@ -1,10 +1,11 @@
 package com.personal.product.service;
 
-import com.personal.product.domain.ProductDO;
-import com.personal.product.dto.AddProductDto;
-
 import java.util.List;
 import java.util.Map;
+
+import com.personal.product.domain.ProductDO;
+import com.personal.product.dto.AddProductDto;
+import com.personal.product.dto.QueryProductDto;
 
 /**
  * 
@@ -30,4 +31,6 @@ public interface ProductService {
 	int batchRemove(Integer[] ids);
 	
 	int add(AddProductDto addProductDto);
+	
+	List<ProductDO> list(QueryProductDto queryProductDto);
 }

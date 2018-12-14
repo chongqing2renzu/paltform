@@ -17,9 +17,9 @@ import com.personal.product.dao.ProductDao;
 import com.personal.product.dao.ProductDimensionDao;
 import com.personal.product.dao.ProductResourceDao;
 import com.personal.product.domain.ProductDO;
-import com.personal.product.domain.ProductDimensionDO;
 import com.personal.product.domain.ProductResourceDO;
 import com.personal.product.dto.AddProductDto;
+import com.personal.product.dto.QueryProductDto;
 import com.personal.product.service.ProductService;
 
 import tk.mybatis.mapper.entity.Condition;
@@ -151,6 +151,55 @@ public class ProductServiceImpl implements ProductService {
 //		productDimensionDao.insertList(productDimensionDOList);
 		
 		return ret;
+	}
+
+	@Override
+	public List<ProductDO> list(QueryProductDto queryProductDto) {
+		
+		Condition condition = new Condition(ProductDO.class);
+		
+		Criteria criteria = condition.createCriteria();
+		if(StringUtils.isNoneBlank(queryProductDto.getName())){
+			criteria.andLike("name", queryProductDto.getName());
+		}
+		
+		if(queryProductDto.getMinPrice() != null){
+			criteria.andGreaterThanOrEqualTo("realPrice", queryProductDto.getMinPrice());
+		}
+		if(queryProductDto.getMaxPrice() != null){
+			criteria.andLessThanOrEqualTo("realPrice", queryProductDto.getMaxPrice());
+		}
+		
+		if(queryProductDto.getTypeId() != null){
+			criteria.andEqualTo("typeId", queryProductDto.getTypeId());
+		}
+		
+		if(queryProductDto.getTypePid() != null){
+			criteria.andEqualTo("typePid", queryProductDto.getTypePid());
+		}
+		
+		if(queryProductDto.getPriceSort() != null){
+			if(queryProductDto.getPriceSort() == 0){
+				//升序
+				condition.orderBy("realPrice").asc();
+			} else {
+				//降序
+				condition.orderBy("realPrice").desc();
+			}
+		}
+		
+		if(queryProductDto.getSoldSort() != null){
+			if(queryProductDto.getSoldSort() == 0){
+				//升序
+				condition.orderBy("slodNums").asc();
+			} else {
+				//降序
+				condition.orderBy("slodNums").desc();
+			}
+		}
+		
+		
+		return productDao.selectByCondition(condition);
 	}
 	
 }

@@ -32,4 +32,6 @@ public interface ProductTypeService {
 	List<ProductTypeVo> productTypeList(Integer typeId);
 	
 	List<ProductTypeDO> productTypeList(ProductTypeDO productTypeDO);
+	
+	List<ProductTypeDO> productTypeListLike(ProductTypeDO productTypeDO);
 }
